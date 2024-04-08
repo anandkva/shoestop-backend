@@ -18,6 +18,18 @@ const addProducts = async(req,res) =>{
         res.json({error : error})
     }
 }
+const addManyProducts = async (req, res) => {
+    try {
+        const products = req.body;
+        const savedProducts = await Products.insertMany(products);
+        res.status(201).json({
+            message: 'Products added successfully',
+            products: savedProducts
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
 
 const getAllProducts = async(req,res)=>{
     try{
@@ -30,4 +42,4 @@ const getAllProducts = async(req,res)=>{
     }
 }
 
-module.exports = {addProducts,getAllProducts}
+module.exports = {addProducts, addManyProducts, getAllProducts}

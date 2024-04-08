@@ -42,11 +42,11 @@ const login = asyncHandler (  async (req, res) => {
       }
   
       // Generate a JWT token
-      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      const token = jwt.sign({ _id: user._id, name: user.name }, process.env.JWT_SECRET, {
         expiresIn: '1h'
       });
   
-      res.json({ token });
+      res.json({user, token });
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: 'Something went wrong' });

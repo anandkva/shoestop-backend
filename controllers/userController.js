@@ -9,7 +9,7 @@ const signUp = asyncHandler(async (req,res) =>{
     const existingUser = await Users.findOne({email})
 
     if(existingUser ){
-        throw new Error ("User Already Exists")
+      res.status(403).json("Already User Exist")
     }
 
     const user = await Users.create({
